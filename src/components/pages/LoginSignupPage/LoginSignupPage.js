@@ -7,6 +7,8 @@ import localize from "localize";
 import { colors, theme } from 'style';
 import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
+import Misc from 'components/UI/Misc';
+const { TextLine } = Misc;
 
 class LoginSignupPage extends Component {
   constructor(props) {
@@ -53,17 +55,13 @@ class LoginSignupPage extends Component {
             title={ localize[locale].loginBtn }
           />
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20, marginBottom: 20, }}>
-          <View style={{ borderTopColor: '#82849B', borderTopWidth: 1, borderStyle: 'solid', flexGrow: 1 }} />
-          <Text style={{ textAlign: 'center', color: '#82849B', paddingLeft: 10, paddingRight: 10 }}>və ya</Text>
-          <View style={{ borderTopColor: '#82849B', borderTopWidth: 1, borderStyle: 'solid', flexGrow: 1 }} />
-        </View>
+        {/* {<TextLine text={ localize[locale].or } size="medium" />
         <View>
           <Button
             title="Sign up"
             transparent
           />
-        </View>
+        </View>} */}
       </View>
     );
   }

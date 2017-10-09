@@ -3,6 +3,7 @@ const strings = {
     emailInput: 'E-mail',
     passwordInput: '•••••••',
     loginBtn: 'Daxil ol',
+    or: 'və ya'
   }
 };
 
