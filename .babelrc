@@ -9,6 +9,7 @@
       { "src": "./config.js", "expose": "config" },
       { "src": "./src/utils", "expose": "utils" },
       { "src": "./src/localize.js", "expose": "localize" },
+      { "src": "./assets", "expose": "assets" },
     ]]
   ]
 }

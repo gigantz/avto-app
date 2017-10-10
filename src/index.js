@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StatusBar } from "react-native";
 import LoginSignupPage from 'components/pages/LoginSignupPage';
 import Tabs from 'components/Tabs';
+import { colors } from 'style';
 import BaseLayout from 'components/pages/BaseLayout';
 
 class Main extends Component {
@@ -12,6 +13,10 @@ class Main extends Component {
   render() {
     return (
         <BaseLayout>
+          <StatusBar
+              backgroundColor={colors.darkG}
+              barStyle="light-content"
+            />
           <LoginSignupPage />
         </BaseLayout>
     );

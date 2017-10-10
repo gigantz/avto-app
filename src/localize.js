@@ -1,9 +1,10 @@
 const strings = {
   az: {
-    emailInput: 'E-mail',
+    emailInput: 'E-mail / Telefon nömrəsi',
     passwordInput: '•••••••',
     loginBtn: 'Daxil ol',
-    or: 'və ya'
+    or: 'və ya',
+    forgot: 'Parolu unudubsan?'
   }
 };
 

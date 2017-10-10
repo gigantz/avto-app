@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import { getMarks, clearCarCache, MARKS } from "actions/auto";
 
 import localize from "localize";
-import { colors, theme } from 'style';
+import { colors, theme, width } from 'style';
 import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
 import Misc from 'components/UI/Misc';
@@ -40,9 +40,11 @@ class LoginSignupPage extends Component {
     const { selectedMark, selectedMarkValue } = this.state;
 
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Image style={{ width: 220, height: 80, marginBottom: 20 }} source={require('assets/img/logo_1000.png')} />
         <View style={[ theme.padd, { marginBottom: 20 }]}>
           <Input
+            keyboardType="email-address"
             placeholder={ localize[locale].emailInput }
             onChangeText={() => {}}
           />
@@ -53,6 +55,7 @@ class LoginSignupPage extends Component {
           />
           <Button
             title={ localize[locale].loginBtn }
+            transparent
           />
         </View>
         {/* {<TextLine text={ localize[locale].or } size="medium" />

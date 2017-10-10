@@ -9,7 +9,9 @@ import { colors } from 'style';
 
 type Props = {
   disabled?: boolean,
-  title: string
+  title: string,
+  white: boolean,
+  textColor: Object
 }
 
 class Button extends Component {
@@ -18,12 +20,12 @@ class Button extends Component {
   }
 
   render() {
-    const { title, white, transparent } = this.props;
+    const { title, white, transparent, textColor, naked } = this.props;
     
     return (
       <TouchableOpacity onPress={this._onPressButton}>        
-        <View style={ !transparent ? style.root : style.transparent }>
-          <Text style={ !transparent ? style.text : style.text }> { title } </Text>
+        <View style={ !transparent ? !naked ? style.root : style.naked : style.transparent }>
+          <Text style={ !transparent ? !naked ? style.text : style.textTransparent : style.textTransparent }> { title } </Text>
         </View>
       </TouchableOpacity>
     )
@@ -42,7 +44,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10
   },
 
   white: {
@@ -62,8 +63,23 @@ const style = StyleSheet.create({
   transparent: {
     position: 'relative',
     borderWidth: 1,
-    borderColor: colors.white,
+    borderColor: colors.goblin,
+    borderStyle: 'solid',
     borderRadius: 2,
+    backgroundColor: 'transparent',
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+
+  textTransparent: {
+    color: colors.goblin,
+  },
+
+  naked: {
+    position: 'relative',
     backgroundColor: 'transparent',
     height: 40,
     flexDirection: 'row',
