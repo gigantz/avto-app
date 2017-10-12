@@ -10,7 +10,7 @@ import Button from 'components/UI/Button';
 import Misc from 'components/UI/Misc';
 const { TextLine } = Misc;
 
-class LoginSignupPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
   }
@@ -41,21 +41,23 @@ class LoginSignupPage extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Image style={{ width: 220, height: 80, marginBottom: 20 }} source={require('assets/img/logo_1000.png')} />
+        <Image style={{ width: 180, height: 66, marginBottom: 20 }} source={require('assets/img/logo_1000.png')} />
         <View style={[ theme.padd, { marginBottom: 20 }]}>
+          <Text style={ theme.label }>{localize[locale].emailInput}</Text>
           <Input
             keyboardType="email-address"
-            placeholder={ localize[locale].emailInput }
+            placeholder="Email"
             onChangeText={() => {}}
           />
+          <Text style={ theme.label }>{localize[locale].passwordInput}</Text>
           <Input
-            placeholder={ localize[locale].passwordInput }
+            placeholder="•••••••"
             secureTextEntry
             onChangeText={() => {}}
           />
+          <Text style={ theme.warning }>{ false ? 'Parol səhv yığılıb' : '' }</Text>
           <Button
             title={ localize[locale].loginBtn }
-            transparent
           />
         </View>
         {/* {<TextLine text={ localize[locale].or } size="medium" />
@@ -80,4 +82,4 @@ const mapDispatchToProps = dispatch => ({
   onClearCarCache: key => dispatch(clearCarCache(key))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginSignupPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

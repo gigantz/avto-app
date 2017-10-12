@@ -13,7 +13,8 @@ export const colors = {
   snow500: '#C2CCD9',
 
   fizzy: '#4A5370',
-  goblin: '#30C465'
+  goblin: '#30C465',
+  horror: '#D1241B',
 };
 
 export const theme = StyleSheet.create({
@@ -45,6 +46,15 @@ export const theme = StyleSheet.create({
   },
   footerTextLink: {
     color: colors.goblin,
+  },
+  label: {
+    fontSize: 10,
+    color: colors.borderColor,
+    marginBottom: 5
+  },
+  warning: {
+    color: colors.horror,
+    marginBottom: 10
   }
 });
 

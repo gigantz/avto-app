@@ -50,7 +50,6 @@ export default class Input extends Component<Props> {
         <TextInput
           style={style.inputWrapper}
           underlineColorAndroid="transparent"
-          placeholderTextColor="white"
           { ...props }
         />
       </View>
@@ -68,7 +67,7 @@ const style = StyleSheet.create({
     borderColor: colors.white,
     borderRadius: 2,
     borderStyle: 'solid',
-    backgroundColor: colors.darkG200,
+    backgroundColor: colors.white,
     height: 38,
     flexDirection: 'row',
     marginBottom: 10
@@ -82,7 +81,7 @@ const style = StyleSheet.create({
     textAlignVertical: 'center',
     flexGrow: 1,
     alignSelf: 'stretch',
-    color: colors.white,
+    color: colors.darkG,
   },
 });
 

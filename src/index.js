@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, StatusBar } from "react-native";
-import LoginSignupPage from 'components/pages/LoginSignupPage';
+import Login from 'components/pages/Login';
 import Tabs from 'components/Tabs';
 import { colors } from 'style';
 import BaseLayout from 'components/pages/BaseLayout';
@@ -17,7 +17,7 @@ class Main extends Component {
               backgroundColor={colors.darkG}
               barStyle="light-content"
             />
-          <LoginSignupPage />
+          <Login />
         </BaseLayout>
     );
   }
