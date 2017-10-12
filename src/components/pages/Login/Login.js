@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import { getMarks, clearCarCache, MARKS } from "actions/auto";
 
 import localize from "localize";
-import { colors, theme } from 'style';
+import { colors, theme, width } from 'style';
 import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
+import Misc from 'components/UI/Misc';
+const { TextLine } = Misc;
 
-class LoginSignupPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
   }
@@ -38,32 +40,33 @@ class LoginSignupPage extends Component {
     const { selectedMark, selectedMarkValue } = this.state;
 
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Image style={{ width: 180, height: 66, marginBottom: 20 }} source={require('assets/img/logo_1000.png')} />
         <View style={[ theme.padd, { marginBottom: 20 }]}>
+          <Text style={ theme.label }>{localize[locale].emailInput}</Text>
           <Input
-            placeholder={ localize[locale].emailInput }
+            keyboardType="email-address"
+            placeholder="Email"
             onChangeText={() => {}}
           />
+          <Text style={ theme.label }>{localize[locale].passwordInput}</Text>
           <Input
-            placeholder={ localize[locale].passwordInput }
+            placeholder="•••••••"
             secureTextEntry
             onChangeText={() => {}}
           />
+          <Text style={ theme.warning }>{ false ? 'Parol səhv yığılıb' : '' }</Text>
           <Button
             title={ localize[locale].loginBtn }
           />
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20, marginBottom: 20, }}>
-          <View style={{ borderTopColor: '#82849B', borderTopWidth: 1, borderStyle: 'solid', flexGrow: 1 }} />
-          <Text style={{ textAlign: 'center', color: '#82849B', paddingLeft: 10, paddingRight: 10 }}>və ya</Text>
-          <View style={{ borderTopColor: '#82849B', borderTopWidth: 1, borderStyle: 'solid', flexGrow: 1 }} />
-        </View>
+        {/* {<TextLine text={ localize[locale].or } size="medium" />
         <View>
           <Button
             title="Sign up"
             transparent
           />
-        </View>
+        </View>} */}
       </View>
     );
   }
@@ -79,4 +82,4 @@ const mapDispatchToProps = dispatch => ({
   onClearCarCache: key => dispatch(clearCarCache(key))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginSignupPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

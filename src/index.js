@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from "react-native";
-import LoginSignupPage from 'components/pages/LoginSignupPage';
+import { View, Text, Button, StatusBar } from "react-native";
+import Login from 'components/pages/Login';
 import Tabs from 'components/Tabs';
+import { colors } from 'style';
 import BaseLayout from 'components/pages/BaseLayout';
-import SvgUri from 'react-native-svg-uri';
 
 class Main extends Component {
   constructor(props) {
@@ -13,7 +13,11 @@ class Main extends Component {
   render() {
     return (
         <BaseLayout>
-          <LoginSignupPage />
+          <StatusBar
+              backgroundColor={colors.darkG}
+              barStyle="light-content"
+            />
+          <Login />
         </BaseLayout>
     );
   }
