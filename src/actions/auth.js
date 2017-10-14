@@ -43,11 +43,11 @@ export function login({ email = '', password = '' } : LoginCreds) {
       }
 
     } catch (error) {
-      return dispatch({
+      dispatch({
         type: LOGIN,
         meta: {
           done: true,
-          error: error.response || error.message
+          error: error.response.data || error.message
         }
       })
     }
