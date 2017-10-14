@@ -14,7 +14,7 @@ export const colors = {
 
   fizzy: '#4A5370',
   goblin: '#30C465',
-  horror: '#D1241B',
+  horror: '#FFEB3B',
 };
 
 export const theme = StyleSheet.create({
@@ -26,7 +26,6 @@ export const theme = StyleSheet.create({
     backgroundColor: colors.darkG,
   },
   padd: {
-    
     borderRadius: 4,
     width: width - 40
   },

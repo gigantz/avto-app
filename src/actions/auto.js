@@ -2,8 +2,6 @@ import axios from 'axios';
 import config from 'config';
 import { addStorage, getStorage, checkStorage, clearCache } from 'utils/memory';
 
-axios.defaults.baseURL = config.API;
-
 export const CLEAR_CAR_CACHE = "CLEAR_CAR_CACHE";
 export function clearCarCache(key) {
   return async (dispatch, getState) => {

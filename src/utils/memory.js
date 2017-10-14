@@ -1,11 +1,17 @@
 import { AsyncStorage } from 'react-native';
 
+export const CACHED_USER = "CACHED_USER";
+
 export async function addStorage(key, value) {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     console.error(error);
   }
+}
+
+export function getStoragePromise(key) {
+  return AsyncStorage.getItem(key);
 }
 
 export async function getStorage(key) {

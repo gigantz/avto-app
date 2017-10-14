@@ -2,10 +2,20 @@
 	"name": "avtomapp",
 	"version": "0.0.1",
 	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "cd android && ./gradlew test && cd .. && jest",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "bundle-android": "node node_modules/react-native/local-cli/cli.js bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios --simulator=\"iPhone 4s\"",
+    "ios-release": "node node_modules/react-native/local-cli/cli.js run-ios --simulator=\"iPhone 4s\" --configuration Release",
+    "apk": "cd android && ./gradlew assembleRelease && cd ..",
+    "android-release": "cd android && ./gradlew installRelease && cd ..",
+    "clean-npm": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf node_modules/ && npm cache clean && npm i",
+    "clean-android": "cd android && ./gradlew clean && cd ..",
+    "clean-ios": "rm -rf ios/build/ModuleCache/* ios/build/Build/*",
+    "clean": "npm run clean-npm && npm run clean-android && npm run clean-ios"
+  },
 	"dependencies": {
 		"axios": "^0.16.2",
 		"babel": "^6.23.0",
@@ -13,6 +23,7 @@
 		"immutable": "^4.0.0-rc.3",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.2",
+		"react-native-animatable": "^1.2.4",
 		"react-native-elements": "^0.17.0",
 		"react-native-svg": "^6.0.0-rc1",
 		"react-native-svg-uri": "^1.2.1",

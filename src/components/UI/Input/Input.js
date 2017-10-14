@@ -6,6 +6,8 @@ import {
   StyleSheet,
 } from "react-native";
 import { colors } from 'style';
+import SvgUri from 'react-native-svg-uri';
+import * as Animatable from 'react-native-animatable';
 
 type Props = {
   label?: string,
@@ -14,7 +16,6 @@ type Props = {
   label?: string,
   focused?: boolean,
 };
-
 export default class Input extends Component<Props> {
   constructor(props) {
     super(props);
@@ -27,6 +28,13 @@ export default class Input extends Component<Props> {
     valid: false,
     label: null,
     focused: false
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if(nextProps.invalid !== this.props.invalid) {
+      return true;
+    }
+    return false;
   }
 
   render() {
@@ -42,16 +50,26 @@ export default class Input extends Component<Props> {
     return (
       <View style={[
         style.root,
-        invalid && { borderColor: 'red' },
+        !invalid && { borderColor: colors.white },
         valid && { borderColor: 'green' },
         focused && { borderColor: 'green' }
       ]}>
         {label && <Text>{label}</Text>}
         <TextInput
+          ref="_inputText"
           style={style.inputWrapper}
           underlineColorAndroid="transparent"
           { ...props }
         />
+        { !invalid &&
+          <Animatable.View animation="fadeIn" style={ style.icon }>
+            <SvgUri
+              width="20"
+              height="20"
+              fill={ colors.show500}
+              source={require('assets/icons/check.svg')} />
+          </Animatable.View>
+        }
       </View>
     );
   }
@@ -60,10 +78,7 @@ export default class Input extends Component<Props> {
 const style = StyleSheet.create({
   root: {
     position: 'relative',
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 2,
+    borderWidth: 1,
     borderColor: colors.white,
     borderRadius: 2,
     borderStyle: 'solid',
@@ -83,6 +98,10 @@ const style = StyleSheet.create({
     alignSelf: 'stretch',
     color: colors.darkG,
   },
+
+  icon: {
+    right: 10,
+    top: 8,
+    position: 'absolute',
+  }
 });
-
-

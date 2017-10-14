@@ -11,7 +11,9 @@ type Props = {
   disabled?: boolean,
   title: string,
   white: boolean,
-  textColor: Object
+  textColor: Object,
+  onPress: Function,
+  disabled?: boolean,
 }
 
 class Button extends Component {
@@ -19,12 +21,19 @@ class Button extends Component {
     super(props);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps.disabled !== this.props.disabled) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const { title, white, transparent, textColor, naked } = this.props;
+    const { title, white, transparent, textColor, naked, onPress, disabled } = this.props;
     
     return (
-      <TouchableOpacity onPress={this._onPressButton}>        
-        <View style={ !transparent ? !naked ? style.root : style.naked : style.transparent }>
+      <TouchableOpacity onPress={onPress} disabled={disabled}>        
+        <View style={[ !transparent ? !naked ? style.root : style.naked : style.transparent, disabled && { opacity: 0.7 } ]}>
           <Text style={ !transparent ? !naked ? style.text : style.textTransparent : style.textTransparent }> { title } </Text>
         </View>
       </TouchableOpacity>
@@ -41,6 +50,7 @@ const style = StyleSheet.create({
     borderStyle: 'solid',
     backgroundColor: colors.goblin,
     height: 40,
+    opacity: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
