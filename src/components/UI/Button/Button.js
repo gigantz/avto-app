@@ -29,12 +29,28 @@ class Button extends Component {
   }
 
   render() {
-    const { title, white, transparent, textColor, naked, onPress, disabled } = this.props;
+    const { title, white, black, transparent, textColor, naked, onPress, disabled, buttonColor, borderColor } = this.props;
+    const stateStyle = [
+      style.root,
+      transparent && style.transparent,
+      naked && style.naked,
+      white && style.white,
+      black && style.black,
+      disabled && style.disabled,
+    ];
+
+    const stateTextStyle = [
+      style.rootText,
+      transparent && style.transparentText,
+      naked && style.nakedText,
+      white && style.whiteText,
+      disabled && style.disabledText,
+    ];
     
     return (
-      <TouchableOpacity onPress={onPress} disabled={disabled}>        
-        <View style={[ !transparent ? !naked ? style.root : style.naked : style.transparent, disabled && { opacity: 0.7 } ]}>
-          <Text style={ !transparent ? !naked ? style.text : style.textTransparent : style.textTransparent }> { title } </Text>
+      <TouchableOpacity onPress={onPress} disabled={disabled}>
+        <View style={[ stateStyle, buttonColor && { backgroundColor: buttonColor, borderColor } ]}>
+          <Text style={[ stateTextStyle, textColor && { color: textColor } ]}> { title } </Text>
         </View>
       </TouchableOpacity>
     )
@@ -56,6 +72,15 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
 
+  black: {
+    borderColor: colors.darkG,
+    backgroundColor: colors.darkG,
+  },
+
+  rootText: {
+    color: colors.white,
+  },
+
   white: {
     position: 'relative',
     borderWidth: 1,
@@ -68,6 +93,10 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10
+  },
+
+  textWhite: {
+    color: colors.goblin,
   },
 
   transparent: {
@@ -84,7 +113,7 @@ const style = StyleSheet.create({
     marginBottom: 10
   },
 
-  textTransparent: {
+  transparentText: {
     color: colors.goblin,
   },
 
@@ -98,12 +127,17 @@ const style = StyleSheet.create({
     marginBottom: 10
   },
 
-  textWhite: {
+  nakedText: {
     color: colors.goblin,
   },
 
-  text: {
-    color: colors.white,
+  disabled: {
+    backgroundColor: colors.snow300,
+    borderColor: colors.snow300,
+  },
+
+  disabledText: {
+    color: colors.snow500
   },
 });
 

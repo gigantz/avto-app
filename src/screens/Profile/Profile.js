@@ -13,14 +13,14 @@ class Login extends Component {
   }
 
   render() {
-    const { user, authenticated } = this.props;
-
+    const { user, authenticated, users } = this.props;
     return (
-      <Animatable.View animation="fadeIn" style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Animatable.View animation="fadeIn" style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.darkG }}>
         { user && authenticated &&
           <View>
             <Animatable.Text animation="fadeIn" style={{ color: 'white', fontSize: 25 }}>{ `${user.firstname} ${user.lastname}` }</Animatable.Text>
-            <Animatable.Text animation="fadeIn" style={{ color: 'white', fontSize: 10 }}>Axırıncı giriş { Date(user.lastLogged).toLocaleString('ru') }</Animatable.Text>
+            {users && <View style={{ marginTop: 10, marginBottom: 10 }}>{users.map(({ _id, firstname, lastname }) => 
+            <Text style={{ color: 'white' }} key={_id}>{ firstname + ' ' + lastname }</Text>)}</View>}
           </View>
         }
         <Button title="Logout" onPress={ this.props.onLogout } />
@@ -29,9 +29,11 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user, realtime }) => ({
   user: user.toJS(),
-  authenticated: user.get('authenticated')
+  authenticated: user.get('authenticated'),
+  logs: realtime.get('logs'),
+  users: realtime.get('peopleOnline'),
 })
 
 const mapDispatchToProps = (dispatch) => ({

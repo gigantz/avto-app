@@ -34,6 +34,9 @@ export default class Input extends Component<Props> {
     if(nextProps.invalid !== this.props.invalid) {
       return true;
     }
+    if(nextProps.value !== this.props.value) {
+      return true;
+    }
     return false;
   }
 
@@ -50,15 +53,17 @@ export default class Input extends Component<Props> {
     return (
       <View style={[
         style.root,
-        !invalid && { borderColor: colors.white },
+        !invalid && { borderColor: colors.snow200, backgroundColor: colors.snow200 },
         valid && { borderColor: 'green' },
         focused && { borderColor: 'green' }
       ]}>
         {label && <Text>{label}</Text>}
         <TextInput
           ref="_inputText"
+          value={value}
           style={style.inputWrapper}
           underlineColorAndroid="transparent"
+          placeholderTextColor={colors.snow500}
           { ...props }
         />
         { !invalid &&
@@ -79,7 +84,7 @@ const style = StyleSheet.create({
   root: {
     position: 'relative',
     borderWidth: 1,
-    borderColor: colors.white,
+    borderColor: colors.borderColor,
     borderRadius: 2,
     borderStyle: 'solid',
     backgroundColor: colors.white,
@@ -98,6 +103,7 @@ const style = StyleSheet.create({
     alignSelf: 'stretch',
     color: colors.darkG,
   },
+  
 
   icon: {
     right: 10,

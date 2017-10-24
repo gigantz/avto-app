@@ -1,5 +1,6 @@
 import im from 'immutable';
 import { LOGIN, LOGOUT } from 'actions/auth';
+import { WS_USER_UPDATES } from 'actions/socket';
 
 const initialState = im.fromJS({
   firstname: null,
@@ -31,6 +32,10 @@ export default function (state = initialState, action) {
       } else {
         return state;
       }
+    case WS_USER_UPDATES:
+      if(action.meta && !action.meta.prop) return state;
+      return state.
+        set(action.meta.prop, action.payload);
     case LOGOUT:
       return initialState;
     default:

@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
 import { createLogger } from 'redux-logger';
+import { transitionTo } from 'middlewares';
 import axios from 'axios';
 import config from 'config';
 
@@ -14,7 +15,7 @@ axios.defaults.baseURL = config.API;
 export default function configureStore(initialState: any = undefined) {
   const logger = createLogger();
   const enhancer = composeEnhancers(
-    applyMiddleware(thunk, logger)
+    applyMiddleware(thunk, logger, transitionTo)
   )
   return createStore(rootReducer, initialState, enhancer)
 }

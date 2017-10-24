@@ -1,15 +1,24 @@
 import axios from 'axios';
 import { REDIRECT_TO } from 'actions/ui';
 import { addStorage, clearCache, CACHED_USER } from 'utils/memory';
+import { rules } from 'utils/validation';
 
 type LoginCreds = {
-  email?: string,
+  login?: string,
   password?: string
 }
 
 export const LOGIN = "LOGIN";
-export function login({ email = '', password = '' } : LoginCreds) {
+export function login({ loginValue = '', password = '' } : LoginCreds) {
   return async dispatch => {
+    let loginProp;
+    if(rules.email(loginValue)) {
+      loginProp = "email";
+    } else if(rules.phone(loginValue)) {
+      loginProp = "phone";
+    } else {
+      return false;
+    }
 
     dispatch({
       type: LOGIN,
@@ -19,7 +28,7 @@ export function login({ email = '', password = '' } : LoginCreds) {
     })
 
     try {
-      const login = await axios.post('/auth/login', { email, password });
+      const login = await axios.post('/auth/login', { [loginProp]: loginValue, password });
       const { data } = login;
 
       data.user.logs = data.user.logs.slice(0, 10);
@@ -38,7 +47,7 @@ export function login({ email = '', password = '' } : LoginCreds) {
       if(data.token) {
         dispatch({
           type: REDIRECT_TO,
-          payload: 'profile'
+          pathto: 'Profile'
         })
       }
 
