@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import { colors } from 'style';
+import { colors, width } from 'style';
+import FacebookIcon from './Facebook';
 
 type Props = {
   disabled?: boolean,
@@ -14,6 +15,7 @@ type Props = {
   textColor: Object,
   onPress: Function,
   disabled?: boolean,
+  fullWidth: boolean,
 }
 
 class Button extends Component {
@@ -22,20 +24,40 @@ class Button extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if(nextProps.disabled !== this.props.disabled) {
+    if(nextProps.disabled !== this.props.disabled ||
+      nextProps.title !== this.props.title ) {
       return true;
     }
     return false;
   }
 
   render() {
-    const { title, white, black, transparent, textColor, naked, onPress, disabled, buttonColor, borderColor } = this.props;
+    const {
+      style : styleProp,
+      title,
+      white,
+      black,
+      transparent,
+      textColor,
+      naked,
+      onPress,
+      disabled,
+      buttonColor,
+      borderColor,
+      fullWidth,
+      small,
+      facebook,
+    } = this.props;
+
     const stateStyle = [
       style.root,
       transparent && style.transparent,
       naked && style.naked,
       white && style.white,
       black && style.black,
+      fullWidth && { width: '100%' },
+      small && { height: 25 },
+      facebook && { backgroundColor: '#3b5998', borderColor: '#3b5998' },
       disabled && style.disabled,
     ];
 
@@ -49,7 +71,8 @@ class Button extends Component {
     
     return (
       <TouchableOpacity onPress={onPress} disabled={disabled}>
-        <View style={[ stateStyle, buttonColor && { backgroundColor: buttonColor, borderColor } ]}>
+        <View style={[ stateStyle, buttonColor && { backgroundColor: buttonColor, borderColor }, styleProp ]}>
+          { facebook && <FacebookIcon /> }
           <Text style={[ stateTextStyle, textColor && { color: textColor } ]}> { title } </Text>
         </View>
       </TouchableOpacity>

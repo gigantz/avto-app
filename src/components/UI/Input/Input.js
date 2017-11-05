@@ -67,7 +67,7 @@ export default class Input extends Component<Props> {
           { ...props }
         />
         { !invalid &&
-          <Animatable.View animation="fadeIn" style={ style.icon }>
+          <Animatable.View useNativeDriver animation="fadeIn" style={ style.icon }>
             <SvgUri
               width="20"
               height="20"

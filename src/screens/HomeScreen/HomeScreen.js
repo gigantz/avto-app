@@ -14,7 +14,7 @@ class Main extends Component {
 
   render() {
     return (
-      <View style={[ theme.base, { backgroundColor: colors.darkG }]}>
+      <View style={[ theme.base, { backgroundColor: colors.white }]}>
         <Logo />
         <StatusBar
         backgroundColor={colors.darkG}

@@ -15,18 +15,26 @@
     "clean-android": "cd android && ./gradlew clean && cd ..",
     "clean-ios": "rm -rf ios/build/ModuleCache/* ios/build/Build/*",
     "clean": "npm run clean-npm && npm run clean-android && npm run clean-ios",
-    "svg": "./node_modules/svg-to-react-native-cli/index.js --dir assets/ --output ./assets/svg"
+    "svg": "./node_modules/svg-to-react-native-cli/index.js --dir assets/icons --output ./assets/svg",
+    "pretty": "prettier --write --single-quote --trailing-comma es5"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "babel": "^6.23.0",
     "babel-plugin-module-alias": "^1.6.0",
     "expo": "^22.0.0",
+    "htmltojsx": "^0.3.0",
     "immutable": "^4.0.0-rc.3",
+    "moment": "^2.19.1",
+    "moment-with-locales-es6": "^2.18.1",
     "react": "16.0.0-beta.5",
     "react-native": "^0.48.4",
     "react-native-animatable": "^1.2.4",
+    "react-native-cache-store": "^1.0.2",
     "react-native-elements": "^0.17.0",
+    "react-native-facebook-login": "^1.6.0",
+    "react-native-image-crop-picker": "^0.18.1",
+    "react-native-indicators": "^0.10.0",
     "react-native-navigation": "^1.1.246",
     "react-native-svg": "^6.0.0-rc1",
     "react-native-svg-uri": "^1.2.1",
@@ -38,6 +46,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
     "remote-redux-devtools": "^0.5.12",
+    "svg-to-jsx": "0.0.21",
+    "svg-to-react-native-cli": "0.0.1",
     "ua-parser": "^0.3.5",
     "xmldom": "^0.1.27"
   },
@@ -45,7 +55,10 @@
     "babel-jest": "21.2.0",
     "babel-preset-react-native": "4.0.0",
     "jest": "21.2.1",
-    "react-test-renderer": "16.0.0-beta.5"
+    "prettier": "^1.7.4",
+    "react-test-renderer": "16.0.0-beta.5",
+    "reactotron-react-native": "^1.12.3",
+    "reactotron-redux": "^1.12.2"
   },
   "jest": {
     "preset": "react-native"

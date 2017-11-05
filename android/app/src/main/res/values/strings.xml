@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">avtomapp</string>
+    <string name="facebook_app_id">1186683634809895</string>
+    <string name="fb_login_protocol_scheme">fb1186683634809895</string>
 </resources>

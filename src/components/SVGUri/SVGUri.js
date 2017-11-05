@@ -95,7 +95,7 @@ type Props = {
   style?: View.props.style,
 };
 type State = {
-  rootSVG: Node,
+  rootSVG: ?Node,
 };
 
 class SVGUri extends React.Component<Props, State> {

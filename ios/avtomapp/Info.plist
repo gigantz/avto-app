@@ -65,5 +65,31 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb1186683634809895</string>
+      </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>1186683634809895</string>
+  <key>FacebookDisplayName</key>
+  <string>AvtoBirlik</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access Warning</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>NSCameraUsageDescription</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Photo Library Access Warning</string>
 </dict>
 </plist>

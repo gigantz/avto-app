@@ -1,6 +1,7 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 export const {height, width} = Dimensions.get('window');
+export const android = Platform.OS === 'android';
 
 export const colors = {
   borderColor: '#DBE2EB',
@@ -21,11 +22,13 @@ export const colors = {
   purple: '#9013FE',
   orange: '#FF9800',
   pony: '#6D1BFF',
+
+  opatown: `rgba(255, 255, 255, 0.9)`
 };
 
 export const theme = StyleSheet.create({
   base: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
@@ -62,11 +65,12 @@ export const theme = StyleSheet.create({
     position: 'absolute',
     height: 40,
     left: 0,
-    top: height - 60, 
+    top: height - (android ? 60 : 40), 
     width: width,
   },
   footerText: {
     color: colors.white,
+    backgroundColor: 'rgba(0,0,0,0)',
     marginRight: 5,
     padding: 15,
     paddingRight: 0,
@@ -75,6 +79,7 @@ export const theme = StyleSheet.create({
   },
   footerTextLink: {
     color: colors.white,
+    backgroundColor: 'rgba(0,0,0,0)',
     padding: 15,
     paddingLeft: 0,
     zIndex: 2,
@@ -89,11 +94,54 @@ export const theme = StyleSheet.create({
   warning: {
     color: colors.horror,
     marginBottom: 10
+  },
+  h1: {
+    fontSize: 20,
+    width: '80%',
+    fontWeight: 'bold',
+    color: colors.darkG,
+    marginBottom: 5,
+    textAlign: 'center'
+  },
+  loading: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: colors.opatown,
+    position: 'absolute',
+    zIndex: 10,
+  },
+  profileHeader: {
+    flex: 1,
+    alignSelf: 'center',
+    flexDirection: 'column',
+    padding: 20,
+  },
+  profilePicture: {
+    borderRadius: 100,
+    width: 120,
+    height: 120,
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  mediumText: {
+    color: colors.darkG,
+    fontSize: 20
+  },
+  smallText: {
+    fontSize: 12,
+    color: colors.snow600
+  },
+  block: {
+    backgroundColor: colors.snow200,
+    width
   }
 });
 
 export default {
   colors,
   theme,
-  width
+  width,
+  android
 }

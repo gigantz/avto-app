@@ -5,7 +5,7 @@ export const isAnEmail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+
 export const birthdate = /null/g;
 
 export const rules = {
-  email: value => value && value.match(isAnEmail),
+  email: value => value && String(value).match(isAnEmail),
   phone: value => value && String(value).length === 13 && value[0] === "+",
   password: value => value && value.length >= 6,
   repeatPassword: value => value && value.length >= 6,
@@ -14,7 +14,16 @@ export const rules = {
 };
 
 export const validator = (key, value) => {
-  return rules[key](value.trim());
+  return !!rules[key](value.trim());
+}
+
+export const emailOrPhone = (value) => {
+  if(value && !value[0].match(/[+]/gi)) {
+   return "email";
+  } else if(value && value[0].match(/[0-9+]/gi)) {
+   return "phone";  
+  }
+  return false;
 }
 
 export default validator;

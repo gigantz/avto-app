@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, Button, StatusBar, AsyncStorage } from "react-native";
 import { connect } from 'react-redux';
 import socketAction from 'actions/socket';
@@ -8,18 +8,13 @@ import Socket from 'utils/websocket';
 import config from 'config';
 
 import { colors } from 'style';
-
-class Main extends Component {
+class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPage: 'splash',
     }
   }
-
-  static navigationOptions = {
-    title: 'Great',
-  };
 
   componentWillMount() {
     
@@ -62,7 +57,7 @@ class Main extends Component {
       }))
     }
 
-    if(nextProps.userId !== this.props.userId && nextProps.user.get('authenticated')) {
+    if(nextProps.userId !== this.props.userId && nextProps.authenticated) {
       this.socket = new Socket({
         server: config.WS,
         userId: nextProps.userId || String(Math.random() + '(guest)').substr(3),
@@ -72,17 +67,12 @@ class Main extends Component {
       return false;
     }
 
-    if(!nextProps.user.get('authenticated') && this.socket && this.socket.connected) {
+    if(!nextProps.user.authenticated && this.socket && this.socket.connected) {
       this.socket.closeConnection();
     }
   }
-
-  componentDidMount() {
-
-  }
   
   render() {
-    
     const { currentPage } = this.state;
     const { page, authenticated } = this.props;
 
@@ -96,9 +86,8 @@ class Main extends Component {
 
 const mapStateToProps = ({ ui, user }) => ({
   user,
-  page: ui.get('page'),
-  authenticated: user.get('authenticated'),
-  userId: user.get('userId'),
+  authenticated: user.authenticated,
+  userId: user.userId,
 })
 
 const mapDispatchToProps = (dispatch) => ({

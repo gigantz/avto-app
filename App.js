@@ -1,24 +1,36 @@
 // @flow
+
 import { Provider, connect } from 'react-redux';
 import * as React from 'react';
 import configureStore from './src/settings';
 import AppNavigator from './src/router';
 import { addNavigationHelpers, withNavigation } from 'react-navigation';
-import { getStoragePromise, CACHED_USER } from 'utils/memory';
-import { AsyncStorage } from "react-native";
+import { CACHED_USER } from 'utils/memory';
+import { BackHandler, View } from "react-native";
+import CacheStore from 'react-native-cache-store';
 import { REDIRECT_TO } from './src/router.js';
 import socketAction from 'actions/socket';
 import Socket from 'utils/websocket';
+import TabsNav from 'components/TabsNav';
+import moment from 'moment-with-locales-es6';
+import './ReactotronConfig';
+
+moment.locale('az');
 
 const store = configureStore();
-type Props = {};
+type Props = {
+  router: Object,
+  onRedirect: Function,
+  dispatcher: Function
+};
 
-class App extends React.Component {
+class App extends React.Component<Props> {
   componentWillMount() {
-    AsyncStorage.getItem(CACHED_USER)
+    CacheStore.flushExpired();
+
+    CacheStore.get(CACHED_USER)
     .then(res => JSON.parse(res))
     .then(res => {
-      console.log('cache', res);
       if(!res) {
         this.props.onRedirect({
           type: REDIRECT_TO,
@@ -37,14 +49,16 @@ class App extends React.Component {
       if(res.token) {
         return this.props.onRedirect({
           type: REDIRECT_TO,
-          pathto: 'Profile',
+          pathto: 'Main',
         })
       }
+    })
+    .catch(e => {
       this.props.onRedirect({
         type: REDIRECT_TO,
-        pathto: 'Profile',
+        pathto: 'Login',
       })
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -62,23 +76,21 @@ class App extends React.Component {
     //   this.socket.closeConnection();
     // }
   }
-  
 
   render() {
     return (
-      <AppNavigator navigation={addNavigationHelpers({
-        dispatch: this.props.dispatch,
-        state: this.props.router,
-      })} />
+        <AppNavigator navigation={addNavigationHelpers({
+          dispatch: this.props.dispatcher,
+          state: this.props.router,
+        })} />
     );
   }
 }
 
 const mapStateToProps = ({ ui, user, router }) => ({
   user,
-  page: ui.get('page'),
-  authenticated: user.get('authenticated'),
-  userId: user.get('userId'),
+  authenticated: user.authenticated,
+  userId: user.userId,
   router
 })
 
@@ -86,10 +98,10 @@ const mapDispatchToProps = (dispatch) => ({
   onLoginCache: (dispatcher) => dispatch(dispatcher),
   onSocket: (dispatcher) => dispatch(dispatcher),
   onRedirect: (dispatcher) => dispatch(dispatcher),
+  dispatcher: dispatch
 });
 
 const AppWithNavigationState = connect(mapStateToProps, mapDispatchToProps)(App);
-
 class Root extends React.Component {  
   render() {
     return (

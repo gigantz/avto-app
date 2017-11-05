@@ -1,17 +1,26 @@
 import im from 'immutable';
-import { REDIRECT_TO } from 'actions/ui';
-import { LOGOUT } from 'actions/auth';
+import { TABS_TRIGGER } from 'actions/ui';
+import { LOGIN, LOGOUT } from 'actions/auth';
 
 const initialState = im.fromJS({
-  page: 'login'
+  tabsVisible: false,
 });
 
 export default function (state = initialState, action) {
   switch(action.type) {
-    case REDIRECT_TO:
-      return state.set('page', action.payload);
+    case TABS_TRIGGER:
+      return state
+        .set('tabsVisible', action.payload.show);
+    case LOGIN:
+      if(action.meta && action.meta.done && !action.meta.error) {
+        return state
+        .set('tabsVisible', true);
+      }
     case LOGOUT:
-      return state.set('page', 'login');
+      if(action.meta && action.meta.done && !action.meta.error) {
+        return state
+        .set('tabsVisible', false);
+      }
     default:
       return state;
   }

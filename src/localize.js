@@ -1,5 +1,6 @@
 const strings = {
   az: {
+    wait: 'yüklənir...',
     loginInput: 'Telefon və ya E-mail',
     phone: 'Telefon nömrəsi',
     email: 'E-mail ünvan',
@@ -9,7 +10,7 @@ const strings = {
     signUpBtn: 'Avtobirliyə qoşul',
     or: 'və ya',
     forgot: 'Parolu unudubsan?',
-    wrong_email_password: 'Email və ya Şifrə səhv yığılıb',
+    wrong_email_password: 'Məlumatlar düzgün deyil',
     signup_email_phone: '+994XX-XXX-XX-XX / emin@gmail.com',
     signup_fullname: 'Emin Jafarov',
     signup_fullname_label: 'Ad və soyad',
@@ -17,6 +18,9 @@ const strings = {
     signup_loginHeader: 'Telefon nömrəsini və ya Email ünvanını ilə daxil ol',
     signup_fullnameHeader: 'Profiliniz üçün ad və soyad mütləqdi',
     signup_passwordHeader: 'Şifrəniz ən azı 6 hərf/rəqəmd-dən ibarət olmalıdı',
+    alreadyExist: 'artıq mövcuddur',
+    afterSignup: 'Avtobirliyə xoş gəldin',
+    getStarted: 'Başla'
   }
 };
 
