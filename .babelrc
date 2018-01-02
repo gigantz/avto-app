@@ -1,15 +1,18 @@
 {
   "presets": ["react-native"],
   "plugins": [
+    // [["extensible-destructuring", {"mode": "optout", "impl": "safe"}]],
     ["module-alias", [
       { "src": "./src/components", "expose": "components" },
+      { "src": "./src/screens", "expose": "screens" },
       { "src": "./src/reducers", "expose": "reducers" },
       { "src": "./src/actions", "expose": "actions" },
-      { "src": "./src/style", "expose": "style" },
+      { "src": "./src/middlewares", "expose": "middlewares" },
+      { "src": "./src/style/theme.style.js", "expose": "style" },
       { "src": "./config.js", "expose": "config" },
       { "src": "./src/utils", "expose": "utils" },
       { "src": "./src/localize.js", "expose": "localize" },
-      { "src": "./assets", "expose": "assets" },
+      { "src": "./assets", "expose": "assets" }
     ]]
   ]
 }

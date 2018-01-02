@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
-
+import { colors } from 'style';
 
 /*
 * Text Line Component
@@ -28,7 +28,7 @@ const fontSizes = {
 }
 
 export const TextLine = ({ text, size }) => (
-  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20, marginBottom: 20, }}>
+  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20, marginBottom: 20, paddingLeft: 20, paddingRight: 20,}}>
     <View style={ style.viewLine } />
     <Text style={[style.textLine, fontSizes[size] ]}>{text}</Text>
     <View style={ style.viewLine } />
@@ -37,14 +37,14 @@ export const TextLine = ({ text, size }) => (
 
 const style = StyleSheet.create({
   viewLine: {
-    borderTopColor: '#82849B',
+    borderTopColor: colors.snow200,
     borderTopWidth: 1,
     borderStyle: 'solid',
     flexGrow: 1
   },
   textLine: {
     textAlign: 'center',
-    color: '#82849B',
+    color: colors.snow500,
     paddingLeft: 10,
     paddingRight: 10
   }

@@ -3,14 +3,18 @@ package com.avtomapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
+import com.magus.fblogin.FacebookLoginPackage;
 
 import java.util.Arrays;
 import java.util.List;
+import com.facebook.FacebookSdk;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -24,7 +28,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new SvgPackage()
+            new RNFetchBlobPackage(),
+          new PickerPackage(),
+          new SvgPackage(),
+          new FacebookLoginPackage()
       );
     }
 

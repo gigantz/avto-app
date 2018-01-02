@@ -1,33 +1,77 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   TouchableOpacity,
   Text,
   View,
   StyleSheet,
 } from 'react-native';
-import { colors } from 'style';
+import { colors, width } from 'style';
+import FacebookIcon from './Facebook';
+import Ripple from 'react-native-material-ripple';
+import SVGUri from 'components/SVGUri';
 
 type Props = {
   disabled?: boolean,
   title: string,
   white: boolean,
-  textColor: Object
+  textColor: Object,
+  onPress: Function,
+  disabled?: boolean,
+  fullWidth: boolean,
 }
 
-class Button extends Component {
+class Button extends PureComponent {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { title, white, transparent, textColor, naked } = this.props;
+    const {
+      style : styleProp,
+      title,
+      white,
+      black,
+      transparent,
+      textColor,
+      naked,
+      onPress,
+      disabled,
+      buttonColor,
+      borderColor,
+      fullWidth,
+      small,
+      facebook,
+      icon,
+    } = this.props;
+
+    const stateStyle = [
+      style.root,
+      transparent && style.transparent,
+      naked && style.naked,
+      white && style.white,
+      black && style.black,
+      fullWidth && { width: '100%' },
+      small && { height: 25 },
+      facebook && { backgroundColor: '#3b5998', borderColor: '#3b5998' },
+      disabled && style.disabled,
+    ];
+
+    const stateTextStyle = [
+      style.rootText,
+      transparent && style.transparentText,
+      naked && style.nakedText,
+      white && style.whiteText,
+      disabled && style.disabledText,
+    ];
     
     return (
-      <TouchableOpacity onPress={this._onPressButton}>        
-        <View style={ !transparent ? !naked ? style.root : style.naked : style.transparent }>
-          <Text style={ !transparent ? !naked ? style.text : style.textTransparent : style.textTransparent }> { title } </Text>
+      <Ripple onPress={onPress} disabled={disabled}>
+        <View style={[ stateStyle, buttonColor && { backgroundColor: buttonColor, borderColor }, styleProp, icon && { justifyContent: 'flex-start' } ]}>
+          { facebook && <FacebookIcon /> }
+          { icon && <SVGUri style={{ marginRight: 5 }} svgXmlData={icon} width="20" height="20" /> }
+          <Text style={[ stateTextStyle, textColor && { color: textColor }, small && { fontSize: 12 } ]}> { title } </Text>
         </View>
-      </TouchableOpacity>
+      </Ripple>
     )
   }
 }
@@ -41,9 +85,19 @@ const style = StyleSheet.create({
     borderStyle: 'solid',
     backgroundColor: colors.goblin,
     height: 40,
+    opacity: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  black: {
+    borderColor: colors.darkG,
+    backgroundColor: colors.darkG,
+  },
+
+  rootText: {
+    color: colors.white,
   },
 
   white: {
@@ -60,6 +114,10 @@ const style = StyleSheet.create({
     marginBottom: 10
   },
 
+  textWhite: {
+    color: colors.goblin,
+  },
+
   transparent: {
     position: 'relative',
     borderWidth: 1,
@@ -74,7 +132,7 @@ const style = StyleSheet.create({
     marginBottom: 10
   },
 
-  textTransparent: {
+  transparentText: {
     color: colors.goblin,
   },
 
@@ -88,12 +146,17 @@ const style = StyleSheet.create({
     marginBottom: 10
   },
 
-  textWhite: {
+  nakedText: {
     color: colors.goblin,
   },
 
-  text: {
-    color: colors.white,
+  disabled: {
+    backgroundColor: colors.snow300,
+    borderColor: colors.snow300,
+  },
+
+  disabledText: {
+    color: colors.snow500
   },
 });
 

@@ -1,15 +1,27 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
-import { createLogger } from 'redux-logger';
+import createReduxSaga from 'redux-saga';
+import { transitionTo } from 'middlewares';
+import axios from 'axios';
+import config from 'config';
+import rootSaga from './sagas';
+
+const reduxSaga = createReduxSaga();
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
   shouldHotReload: false
 }) : compose;
 
-export default function configureStore(initialState: any = undefined) {
-  const logger = createLogger();
+axios.defaults.baseURL = config.API;
+
+export function configureStore(initialState: any = undefined) {
   const enhancer = composeEnhancers(
-    applyMiddleware(thunk, logger)
+    applyMiddleware(reduxSaga, thunk, transitionTo)
   )
   return createStore(rootReducer, initialState, enhancer)
 }
+
+export default configureStore();
+
+reduxSaga.run(rootSaga);
