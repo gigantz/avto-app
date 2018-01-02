@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
-import ua from 'ua-parser-js';
 
 import { signup, facebookSignup } from 'actions/auth';
 
@@ -24,8 +23,6 @@ import Misc from 'components/UI/Misc';
 import Loading from 'components/UI/Loading';
 
 const { TextLine } = Misc;
-
-console.log(ua());
 
 type Props = {
   authenticated: boolean,
@@ -128,7 +125,6 @@ export class SignUp extends React.Component<Props, State> {
     if (isValid) {
       this.props.onSignUp(login, password, fullname);
     }
-    console.log(isValid);
   };
 
   _FBsignup = () => {
@@ -256,13 +252,6 @@ export class SignUp extends React.Component<Props, State> {
               this._changeText('repeatPassword', value);
             }}
           />
-          {!loading && error ? (
-            <Animatable.Text animation="wobble" style={theme.warning} useNativeDriver>
-              {error} {' '}
-            </Animatable.Text>
-          ) : (
-            <Text style={theme.warning} />
-          )}
           <Button
             black
             disabled={!loading && !isValid}

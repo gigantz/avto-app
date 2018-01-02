@@ -45,6 +45,9 @@ export default connect(
     firstname,
   }),
   dispatch => ({
-    start: () => dispatch({ type: 'REDIRECT_TO', pathto: 'Main' })
+    start: () => {
+      dispatch({ type: 'REDIRECT_TO', pathto: 'Main' });
+      global.alertDown.alertWithType('success', `Yeni dostumuz,`, 'Xoş gəldin buralara!');
+    }
   })
 )(Splash);

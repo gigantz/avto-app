@@ -22,7 +22,7 @@ import Svg, { Circle } from 'react-native-svg';
 import Loading from 'components/UI/Loading';
 import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
 import Misc from 'components/UI/Misc';
-// console.log(NativeModules);
+
 FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Web);
 
 class Login extends Component {
@@ -137,10 +137,10 @@ class Login extends Component {
               onPress={this._login}
             />
             <Misc.TextLine text="və ya" size="medium" />
+            <View style={{ height: 10 }} />
             <Button
               title={'Facebook ilə daxil olun'}
               onPress={this._FBlogin}
-              style={{ marginTop: 10 }}
               borderColor="#3b5998"
               facebook
             />
@@ -180,7 +180,6 @@ class Login extends Component {
             </Svg>
           </Animatable.View>
         </View>
-        <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
       </ScrollView>
     );
   }

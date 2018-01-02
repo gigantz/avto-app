@@ -17,7 +17,7 @@ class Main extends Component {
       <View style={[ theme.base, { backgroundColor: colors.white }]}>
         <Logo />
         <StatusBar
-        backgroundColor={colors.darkG}
+        backgroundColor={colors.darkerG}
         barStyle="light-content" />
       </View>
     );

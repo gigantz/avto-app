@@ -7,7 +7,10 @@ export const colors = {
   borderColor: '#DBE2EB',
   white: '#FFFFFF',
   dark: '#38444c',
-  darkG: '#273444',
+  darkG: '#262D45',
+  lighterG: '#414963',
+  darkerG: '#161B29',
+  darkG1: '#273444',
   darkG200: '#1F2A38',
   darkG500: '#1A2329',
   snow200: '#F8F9FB',
@@ -23,7 +26,8 @@ export const colors = {
   orange: '#FF9800',
   pony: '#6D1BFF',
 
-  opatown: `rgba(255, 255, 255, 0.9)`
+  opatown: `rgba(255, 255, 255, 0.9)`,
+  opatownBlack:  'rgba(38, 45, 69, 0.9)',
 };
 
 export const theme = StyleSheet.create({
@@ -108,7 +112,10 @@ export const theme = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: colors.opatown,
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.opatownBlack,
     position: 'absolute',
     zIndex: 10,
   },
@@ -117,31 +124,84 @@ export const theme = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'column',
     padding: 20,
+    marginTop: 10,
   },
   profilePicture: {
-    borderRadius: 100,
-    width: 120,
-    height: 120,
-    marginBottom: 10,
+    borderRadius: 45,
+    width: 90,
+    height: 90,
     alignSelf: 'center',
   },
   mediumText: {
     color: colors.darkG,
-    fontSize: 20
+    fontSize: 20,
+    backgroundColor: 'transparent',
   },
   smallText: {
     fontSize: 12,
-    color: colors.snow600
+    color: colors.snow600,
+    backgroundColor: 'transparent',
   },
   block: {
-    backgroundColor: colors.snow200,
     width
+  },
+
+  selectItem: {
+    padding: 15,
+    fontSize: 15,
+    backgroundColor: colors.white,
+    width: '100%',
+    color: colors.darkG,
+  },
+
+  separator: {
+    width: '100%',
+    borderColor: colors.snow300,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderBottomWidth: 0,
+  },
+
+  hiBlock: {
+    alignItems: 'center',
+    borderColor: colors.snow500,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    padding: 20,
+    borderRadius: 4
+  },
+
+  tag: {
+    backgroundColor: colors.darkG,
+    color: colors.white,
+    padding: 5,
+    borderRadius: 4,
+    margin: 2,
+    fontSize: 10,
+  },
+
+  rightTop: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 10,
   }
 });
+
+export const alertColors = {
+  MAIN_INFO_COLOR: '#2B73B6',
+  MAIN_WARN_COLOR: '#cd853f',
+  MAIN_ERROR_COLOR: '#cc3232',
+  MAIN_SUCCESS_COLOR: '#32A54A',
+  MAIN_CUSTOM_COLOR: '#6441A4',
+  MAIN_DISMISS_COLOR: '#748182',
+}
 
 export default {
   colors,
   theme,
   width,
-  android
+  android,
+  alertColors,
 }

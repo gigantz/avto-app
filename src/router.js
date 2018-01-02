@@ -2,22 +2,25 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import Login from 'screens/Login';
 import SignUp from 'screens/SignUp';
 import HomeScreen from 'screens/HomeScreen';
+import Restore from 'screens/Restore';
 import Profile from 'screens/Profile';
 import Welcome from 'screens/Welcome';
 import Tabs from 'components/TabsNav';
+import SelectAuto from 'components/SelectAuto';
 
 const Main = TabNavigator({
-  Welcome2: { screen: Welcome },
-  Login: { screen: Login },
-  Welcome: { screen: Welcome },
-  Avto: { screen: Welcome },
-  Profile: { screen: Profile },
+  Welcome2: { getScreen: () => require('screens/Welcome').default },
+  Login: { getScreen: () => require('screens/Login').default },
+  Welcome: { getScreen: () => require('screens/Welcome').default },
+  MyAuto: { getScreen: () => require('screens/MyAuto').default },
+  Profile: { getScreen: () => require('screens/Profile').default },
 }, {
-  initialRouteName: 'Profile',
+  initialRouteName: 'MyAuto',
   tabBarComponent: Tabs,
   tabBarPosition: 'bottom',
-  swipeEnabled: false,
-  animationEnabled: false,
+  swipeEnabled: true,
+  animationEnabled: true,
+  lazy: true,
 });
 
 export const REDIRECT_TO = "REDIRECT_TO";
@@ -40,6 +43,13 @@ export const screens = StackNavigator({
   },
   Main: {
     screen: Main
+  },
+  Restore: {
+    screen: Restore,
+    path: 'Restore'
+  },
+  SelectAuto: {
+    screen: SelectAuto
   }
 },{
   headerMode: 'none'

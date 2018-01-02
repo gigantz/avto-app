@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { colors } from 'style';
-import SvgUri from 'react-native-svg-uri';
+import SvgUri from 'components/SVGUri';
 import * as Animatable from 'react-native-animatable';
 
 type Props = {
@@ -15,6 +15,10 @@ type Props = {
   valid?: boolean,
   label?: string,
   focused?: boolean,
+  fullWidth?: boolean,
+  noValidation?: boolean,
+  withBorder?: boolean,
+  white?: boolean,
 };
 export default class Input extends Component<Props> {
   constructor(props) {
@@ -27,17 +31,21 @@ export default class Input extends Component<Props> {
     invalid: false,
     valid: false,
     label: null,
-    focused: false
+    focused: false,
+    fullWidth: false,
+    noValidation: false,
+    withBorder: false,
+    white: false,
   }
 
   shouldComponentUpdate(nextProps) {
-    if(nextProps.invalid !== this.props.invalid) {
-      return true;
-    }
-    if(nextProps.value !== this.props.value) {
-      return true;
-    }
-    return false;
+    // if(nextProps.invalid !== this.props.invalid) {
+    //   return true;
+    // }
+    // if(nextProps.value !== this.props.value) {
+    //   return true;
+    // }
+    return true;
   }
 
   render() {
@@ -47,6 +55,10 @@ export default class Input extends Component<Props> {
       valid,
       value,
       focused,
+      fullWidth,
+      withBorder,
+      white,
+      noValidation,
       ...props
     } = this.props;
 
@@ -55,7 +67,15 @@ export default class Input extends Component<Props> {
         style.root,
         !invalid && { borderColor: colors.snow200, backgroundColor: colors.snow200 },
         valid && { borderColor: 'green' },
-        focused && { borderColor: 'green' }
+        focused && { borderColor: 'green' },
+        fullWidth && { width: '100%' },
+        withBorder && {
+          borderWidth: 1,
+          borderColor: colors.snow500,
+          borderRadius: 2,
+          borderStyle: 'solid',
+        },
+        white && { backgroundColor: colors.white }
       ]}>
         {label && <Text>{label}</Text>}
         <TextInput
@@ -66,7 +86,7 @@ export default class Input extends Component<Props> {
           placeholderTextColor={colors.snow500}
           { ...props }
         />
-        { !invalid &&
+        { !invalid && !noValidation &&
           <Animatable.View useNativeDriver animation="fadeIn" style={ style.icon }>
             <SvgUri
               width="20"

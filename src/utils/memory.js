@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 import CacheStore from 'react-native-cache-store';
 
 export const CACHED_USER = "CACHED_USER";
+export const CACHED_AUTO = "CACHED_AUTO";
 
 export async function addStorage(key, value, time) {
   try {

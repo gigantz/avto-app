@@ -1,6 +1,7 @@
 {
   "presets": ["react-native"],
   "plugins": [
+    // [["extensible-destructuring", {"mode": "optout", "impl": "safe"}]],
     ["module-alias", [
       { "src": "./src/components", "expose": "components" },
       { "src": "./src/screens", "expose": "screens" },
@@ -11,7 +12,7 @@
       { "src": "./config.js", "expose": "config" },
       { "src": "./src/utils", "expose": "utils" },
       { "src": "./src/localize.js", "expose": "localize" },
-      { "src": "./assets", "expose": "assets" },
+      { "src": "./assets", "expose": "assets" }
     ]]
   ]
 }

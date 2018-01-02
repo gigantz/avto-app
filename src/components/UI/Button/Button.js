@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import { colors, width } from 'style';
 import FacebookIcon from './Facebook';
+import Ripple from 'react-native-material-ripple';
+import SVGUri from 'components/SVGUri';
 
 type Props = {
   disabled?: boolean,
@@ -18,17 +20,9 @@ type Props = {
   fullWidth: boolean,
 }
 
-class Button extends Component {
+class Button extends PureComponent {
   constructor(props) {
     super(props);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if(nextProps.disabled !== this.props.disabled ||
-      nextProps.title !== this.props.title ) {
-      return true;
-    }
-    return false;
   }
 
   render() {
@@ -47,6 +41,7 @@ class Button extends Component {
       fullWidth,
       small,
       facebook,
+      icon,
     } = this.props;
 
     const stateStyle = [
@@ -70,12 +65,13 @@ class Button extends Component {
     ];
     
     return (
-      <TouchableOpacity onPress={onPress} disabled={disabled}>
-        <View style={[ stateStyle, buttonColor && { backgroundColor: buttonColor, borderColor }, styleProp ]}>
+      <Ripple onPress={onPress} disabled={disabled}>
+        <View style={[ stateStyle, buttonColor && { backgroundColor: buttonColor, borderColor }, styleProp, icon && { justifyContent: 'flex-start' } ]}>
           { facebook && <FacebookIcon /> }
-          <Text style={[ stateTextStyle, textColor && { color: textColor } ]}> { title } </Text>
+          { icon && <SVGUri style={{ marginRight: 5 }} svgXmlData={icon} width="20" height="20" /> }
+          <Text style={[ stateTextStyle, textColor && { color: textColor }, small && { fontSize: 12 } ]}> { title } </Text>
         </View>
-      </TouchableOpacity>
+      </Ripple>
     )
   }
 }

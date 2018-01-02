@@ -102,8 +102,8 @@ android {
         applicationId "com.avtomapp"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 5
+        versionName "1.0.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -154,7 +154,7 @@ repositories {
 
 
 dependencies {
-    compile project(':react-native-fbsdk')
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-image-crop-picker')
     compile project(':react-native-svg')
     compile project(':react-native-facebook-login')

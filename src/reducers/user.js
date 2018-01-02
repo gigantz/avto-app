@@ -1,6 +1,7 @@
 import im from 'immutable';
-import { LOGIN, SIGN_UP, LOGOUT } from 'actions/auth';
+import { LOGIN, SIGN_UP, LOGOUT, UPDATE_USER } from 'actions/auth';
 import { WS_USER_UPDATES } from 'actions/socket';
+import { GET_AUTO, GET_AUTO_ID } from 'actions/auto';
 
 const initialState = {
   firstname: null,
@@ -10,10 +11,14 @@ const initialState = {
   authenticated: false,
   error: null,
   token: null,
+  autoId: null,
+  notifications: [],
 };
 
 export default function (state = initialState, action) {
   switch(action.type) {
+    case UPDATE_USER:
+      return action.payload;
     case LOGIN:
       if(action.meta && action.meta.done && !action.meta.error) {
         return {
@@ -63,6 +68,30 @@ export default function (state = initialState, action) {
         }
       } else {
         return state;
+      }
+    case GET_AUTO_ID:
+      if(action.meta && !action.meta.done) {
+        return {
+          ...state,
+          loading: true
+        };
+      }
+      return {
+        ...state,
+        autoId: action.payload,
+        loading: false
+      }
+    case GET_AUTO:
+      if(action.meta && !action.meta.done) {
+        return {
+          ...state,
+          loading: true
+        };
+      }
+      return {
+        ...state,
+        myauto: action.payload,
+        loading: false,
       }
     case WS_USER_UPDATES:
       if(action.meta && !action.meta.prop) return state;

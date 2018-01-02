@@ -1,12 +1,13 @@
-import { applyMiddleware, compose } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
-// import { createLogger } from 'redux-logger';
+import createReduxSaga from 'redux-saga';
 import { transitionTo } from 'middlewares';
 import axios from 'axios';
 import config from 'config';
-import Reactotron from 'reactotron-react-native';
+import rootSaga from './sagas';
 
+const reduxSaga = createReduxSaga();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
   shouldHotReload: false
@@ -14,10 +15,13 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__
 
 axios.defaults.baseURL = config.API;
 
-export default function configureStore(initialState: any = undefined) {
-  // const logger = createLogger();
+export function configureStore(initialState: any = undefined) {
   const enhancer = composeEnhancers(
-    applyMiddleware(thunk, transitionTo)
+    applyMiddleware(reduxSaga, thunk, transitionTo)
   )
-  return Reactotron.createStore(rootReducer, initialState, enhancer)
+  return createStore(rootReducer, initialState, enhancer)
 }
+
+export default configureStore();
+
+reduxSaga.run(rootSaga);

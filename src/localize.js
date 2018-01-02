@@ -20,7 +20,48 @@ const strings = {
     signup_passwordHeader: 'Şifrəniz ən azı 6 hərf/rəqəmd-dən ibarət olmalıdı',
     alreadyExist: 'artıq mövcuddur',
     afterSignup: 'Avtobirliyə xoş gəldin',
-    getStarted: 'Başla'
+    getStarted: 'Başla',
+    fromGallery: 'Qalereyadan seç',
+    fromCamera: 'Şəkilini çək',
+    removePhoto: 'Şəkili sil',
+    requireAuto: 'Avtonuzu seçin',
+    reselectAuto: 'Avtonu deyiş',
+    auto: {
+      make: 'Marka',
+      model: 'Model',
+      year: 'Model ili',
+      body: 'Ban növü',
+      generation: 'Nəsil',
+      engineVolume: 'Mühərrikin həcmi',
+      enginePower: 'Mühərrikin gücü',
+      engineType: 'Yanacaq növü',
+      gearbox: 'Sürətlər qutusu',
+      drive: 'Ötürücü',
+    },
+    engineType: {
+      Gasoline: 'Benzin',
+      Hybrid: 'Hibrid',
+      Electro: 'Elektrik',
+      Gas: 'Qaz',
+      Diesel: 'Dizel',
+    },
+    gearboxTypes: {
+      Sequential: 'Ardıcıl',
+      Robotic: 'Robotik',
+      Variator: 'Varyator',
+      Automatic: 'Avtomatik',
+      Manual: 'Mexaniki', 
+      'Direct transmission': 'Direkt transmissiya',
+      'Robotic dual clutch': 'Robotik ikili klaç',
+      'Robotic one clutch': 'Robotik tək klaç',
+    },
+    driveTypes: {
+      FWD: 'Ön',
+      RWD: 'Arxa',
+      '4WD': 'Tam',
+      'Full Time': 'Tam vaxt ötürücü',
+      'Part Time': 'Yarım vaxt ötürücü',
+    }
   }
 };
 
